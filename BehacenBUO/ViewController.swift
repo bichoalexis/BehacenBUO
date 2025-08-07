@@ -1,0 +1,19 @@
+//
+//  ViewController.swift
+//  BehacenBUO
+//
+//  Created by Alexis Lomeli Mejia on 07/08/25.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+
+
+}
+
