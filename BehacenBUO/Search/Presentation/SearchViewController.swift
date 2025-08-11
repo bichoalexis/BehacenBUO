@@ -1,5 +1,5 @@
 //
-//  MyRecipesViewController.swift
+//  SearchViewController.swift
 //  BehacenBUO
 //
 //  Created by Alexis Lomeli Mejia on 07/08/25.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class MyRecipesViewController: UIViewController {
+class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .brown
         // Do any additional setup after loading the view.
     }
     
