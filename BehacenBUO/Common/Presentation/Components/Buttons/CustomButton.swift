@@ -23,7 +23,7 @@ class CustomButton: UIButton {
     }
     
     func setUp(with title: String, image: String? = nil) {
-        configuration = .prominentGlass()
+        configuration = .prominentClearGlass()
         configuration?.baseBackgroundColor = .systemBackground
         configuration?.baseForegroundColor = .label
         configuration?.title = title

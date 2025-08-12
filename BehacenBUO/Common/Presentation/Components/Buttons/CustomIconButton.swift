@@ -23,7 +23,7 @@ class CustomIconButton: UIButton {
     }
     
     private func setUp(with systemImage: String, iconColor: UIColor) {
-        configuration = .prominentGlass()
+        configuration = .prominentClearGlass()
         configuration?.imagePlacement = .all
         configuration?.baseBackgroundColor = .systemBackground
         configuration?.baseForegroundColor = iconColor

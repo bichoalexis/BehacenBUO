@@ -7,27 +7,31 @@
 
     import UIKit
 
-    class HomeMainComponent: UIView {
-        let image: UIImageView = UIImageView()
-        let title: TitleLabel = TitleLabel()
-        let subtitle: SubtitleLabel = SubtitleLabel()
-        let mainButtonIconButtonStack: MainButtonWithIconButton = MainButtonWithIconButton()
+class HomeMainComponent: UIView {
+    let image: UIImageView = UIImageView()
+    let title: TitleLabel = TitleLabel()
+    let subtitle: SubtitleLabel = SubtitleLabel()
+    let mainButtonIconButtonStack: MainButtonWithIconButton = MainButtonWithIconButton()
+    
+    private let gradientLayer = CAGradientLayer()
+    private var traitRegistration: UITraitChangeRegistration?
 
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
         
-        init(
-            frame: CGRect = .zero,
-            onButtonTap: Selector? = nil,
-            onFavoritesButtonTap: Selector? = nil,
-            target: Any? = nil
-        ) {
-            super.init(frame: frame)
-            translatesAutoresizingMaskIntoConstraints = false
-            setupImage()
-            setupComponentsInImage(onButtonTap: onButtonTap, onFavoritesButtonTap: onFavoritesButtonTap, target: target)
-        }
+    init(
+        frame: CGRect = .zero,
+        onButtonTap: Selector? = nil,
+        onFavoritesButtonTap: Selector? = nil,
+        target: Any? = nil
+    ) {
+        super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
+        setupImage()
+        setupComponentsInImage(onButtonTap: onButtonTap, onFavoritesButtonTap: onFavoritesButtonTap, target: target)
+        setupTraitObservation()
+    }
         
         func setupComponentsInImage(onButtonTap: Selector? = nil, onFavoritesButtonTap: Selector? = nil, target: Any? = nil) {
             let title = TitleLabel("Grilled Salmon", textColor: .white)
@@ -54,9 +58,6 @@
                 subtitle.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -spacing),
 
             ])
-            
-            
-            
         }
         
         private func setupImage() {
@@ -64,20 +65,55 @@
             image.translatesAutoresizingMaskIntoConstraints = false
             
             image.image = UIImage(resource: .salmon)
-            image.cornerConfiguration = .corners(radius: .fixed(UIConstants.CornerRadius.card))
+            image.layer.cornerRadius = UIConstants.CornerRadius.card
+            image.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            image.layer.masksToBounds = true
             image.contentMode = .scaleAspectFill
             image.clipsToBounds = true
             image.isUserInteractionEnabled = true
             
             NSLayoutConstraint.activate([
-                image.topAnchor.constraint(equalTo: topAnchor),
+                image.topAnchor.constraint(equalTo: topAnchor, constant: -100),
                 image.leadingAnchor.constraint(equalTo: leadingAnchor),
                 image.trailingAnchor.constraint(equalTo: trailingAnchor),
                 image.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
+            
+            addTopGradient()
         }
         
+    private func addTopGradient() {
+        // Asegura que el layout este actualizado
+        layoutIfNeeded()
+
+        gradientLayer.frame = image.bounds
+        gradientLayer.locations = [0.0, 0.2]
+
+        updateGradientColors()
+
+        if gradientLayer.superlayer == nil {
+            image.layer.addSublayer(gradientLayer)
+        }
     }
+
+    private func updateGradientColors() {
+        let topColor = UIColor.systemBackground.resolvedColor(with: traitCollection).cgColor
+        let clearColor = UIColor.clear.cgColor
+        gradientLayer.colors = [topColor, clearColor]
+    }
+
+    private func setupTraitObservation() {
+        traitRegistration = registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, _) in
+            self.updateGradientColors()
+        }
+    }
+    
+    deinit {
+        traitRegistration = nil
+    }
+}
+
+
 
 #Preview {
     HomeMainComponent()
