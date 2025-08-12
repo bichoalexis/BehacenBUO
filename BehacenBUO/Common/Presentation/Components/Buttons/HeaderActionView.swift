@@ -8,7 +8,7 @@
 import UIKit
 
 class HeaderActionView: UIStackView {
-    let actionButton: UIButton = UIButton()
+    var actionButton: TextButton = TextButton()
     var headerTitle: TitleLabel = TitleLabel()
     
     override init(frame: CGRect) {
@@ -44,14 +44,7 @@ class HeaderActionView: UIStackView {
     }
     
     private func configureButton(with title: String){
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        var configuration = actionButton.configuration
-        configuration = .plain()
-        configuration?.title = title
-        configuration?.baseForegroundColor = .red
-        
-        actionButton.configuration = configuration
+        self.actionButton = TextButton(with: title)
     }
     
     private func configureLabel(with text: String){
