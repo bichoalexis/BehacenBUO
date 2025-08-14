@@ -8,7 +8,7 @@
     import UIKit
 
     final class WelcomeSheetView: UIStackView {
-        let welcomeHeader: WelcomeHeader = WelcomeHeader()
+        let welcomeHeader: AuthHeader = AuthHeader(headerType: .welcome)
         
         let emailTextField: CustomTextField = CustomTextField(placeHolder: "Email", keyboardType: .emailAddress, returnKeyType: .continue)
         let passwordTextField: CustomTextField = CustomTextField(placeHolder: "Password", isSecureTextEntry: true, returnKeyType: .done)
@@ -17,7 +17,7 @@
         
         let continueWith: ContinueWithView = ContinueWithView()
         let loginProviders: ProviderLoginMethods = ProviderLoginMethods()
-        let dontHaveAccount: DontHaveAccount = DontHaveAccount()
+        let dontHaveAccount: FooterAuth = FooterAuth(type: .login)
         
         private let dontHaveAccountContainer: UIView = UIView()
         
