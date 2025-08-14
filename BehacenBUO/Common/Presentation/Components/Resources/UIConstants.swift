@@ -16,6 +16,6 @@ enum UIConstants {
 
     enum CornerRadius {
         static let card: CGFloat = 30
-        static let button: CGFloat = 8
+        static let button: CGFloat = 12
     }
 }

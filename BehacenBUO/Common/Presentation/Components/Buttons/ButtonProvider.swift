@@ -47,6 +47,10 @@ class ButtonProvider: UIButton {
     private func configure(provider: Provider) {
         var configuration = configuration
         configuration = .bordered()
+        configuration?.titleAlignment = .center
+        contentMode = .center
+        contentHorizontalAlignment = .center
+        contentVerticalAlignment = .center
         configuration?.buttonSize = .large
         configuration?.background.strokeColor = .tertiaryLabel
         configuration?.baseBackgroundColor = .systemBackground
@@ -62,5 +66,5 @@ class ButtonProvider: UIButton {
 }
 
 #Preview {
-    ButtonProvider(provider: .apple)
+    ButtonProvider(provider: .google)
 }

@@ -17,10 +17,11 @@ class BodyLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(_ text: String, textAlignment: NSTextAlignment = .left, textColor: UIColor = .label, fontSize: CGFloat = 18) {
+    convenience init(_ text: String, textAlignment: NSTextAlignment = .left, textColor: UIColor = .label, fontSize: CGFloat = 18, numberOfLines: Int = 0) {
         self.init(frame: .zero)
         self.textColor = textColor
         self.textAlignment = textAlignment
+        self.numberOfLines = numberOfLines
         self.text = text
         font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
         configureDefaults()

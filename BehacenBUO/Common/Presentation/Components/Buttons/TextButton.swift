@@ -20,7 +20,9 @@ class TextButton: UIButton {
     
     init(with title: String) {
         super.init(frame: .zero)
-        configuration?.title = title
+        var config = UIButton.Configuration.plain()
+        config.title = title
+        super.configuration = config
         configure()
     }
     
@@ -28,10 +30,13 @@ class TextButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         
         var configuration = configuration
-        configuration = .plain()
         configuration?.baseForegroundColor = .red
         
         self.configuration = configuration
     }
     
+}
+
+#Preview {
+    TextButton(with: "Hello World")
 }

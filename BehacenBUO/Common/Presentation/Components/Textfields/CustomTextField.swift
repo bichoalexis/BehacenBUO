@@ -29,11 +29,15 @@ class CustomTextField: UITextField {
     }
     
     private func configure() {
-        borderStyle = .roundedRect
+        borderStyle = .none
+        layer.cornerRadius = UIConstants.CornerRadius.button
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.systemGray4.cgColor
+        clipsToBounds = true
         contentMode = .scaleAspectFit
         autocorrectionType = .no
         autocapitalizationType = .none
-    }
+       }
     
     
         // MARK: - Spacing
