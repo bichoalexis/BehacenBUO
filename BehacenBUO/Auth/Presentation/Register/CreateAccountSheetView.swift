@@ -13,7 +13,7 @@ class CreateAccountSheetView: UIStackView {
     let nameTextField: CustomTextField = CustomTextField(placeHolder: "Name", keyboardType: .default, returnKeyType: .continue)
     let emailTextField: CustomTextField = CustomTextField(placeHolder: "Email", keyboardType: .emailAddress, returnKeyType: .continue)
     let passwordTextField: CustomTextField = CustomTextField(placeHolder: "Password", isSecureTextEntry: true, returnKeyType: .done)
-    let loginButton: CustomFlatButton = CustomFlatButton(with: "Log In")
+    let loginButton: CustomFlatButton = CustomFlatButton(with: "Register")
     
     let continueWith: ContinueWithView = ContinueWithView()
     let loginProviders: ProviderLoginMethods = ProviderLoginMethods()

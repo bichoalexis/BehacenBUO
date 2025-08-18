@@ -1,27 +1,13 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  BehacenBUO
 //
-//  Created by Alexis Lomeli Mejia on 12/08/25.
+//  Created by Alexis Lomeli Mejia on 14/08/25.
 //
 
 import UIKit
-import Combine
 
-class LoginViewController: UIViewController {
-    let viewModel: LoginViewModel
-    
-    var cancellables: Set<AnyCancellable> = []
-    
-    init(viewModel: LoginViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+class RegisterViewController: UIViewController {
     private let appTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,11 +25,10 @@ class LoginViewController: UIViewController {
         v.layer.masksToBounds = false
         return v
     }()
-    let welcomeSheetView = WelcomeSheetView()
+    let welcomeSheetView = CreateAccountSheetView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
 
         view.backgroundColor = .systemGroupedBackground
 
@@ -56,10 +41,6 @@ class LoginViewController: UIViewController {
         view.addSubview(sheetContainer)
         sheetContainer.addSubview(welcomeSheetView)
         welcomeSheetView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Set buttons and textfields
-        welcomeSheetView.loginButton.addTarget(self, action: #selector(onTap), for: .touchUpInside)
-        welcomeSheetView.dontHaveAccount.textButton.addTarget(self, action: #selector(onSignUpTap), for: .touchUpInside)
 
         NSLayoutConstraint.activate([
             sheetContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -77,21 +58,13 @@ class LoginViewController: UIViewController {
         ])
     }
 
-    private func bind() {
-        welcomeSheetView.emailTextField.textPublisher.assign(to: \.email, on: viewModel).store(in: &cancellables)
-        welcomeSheetView.passwordTextField.textPublisher.assign(to: \.password, on: viewModel).store(in: &cancellables)
-    }
 
         @objc func onTap(_ sender: UIButton) {
-            viewModel.onLoginButton()
+            print("Tapped")
         }
-    
-    @objc func onSignUpTap(_ sender: UIButton) {
-        navigationController?.pushViewController(RegisterViewController(), animated: true)
-    }
     }
 
     #Preview {
-        LoginViewController(viewModel: LoginViewModel(saveSession: SaveSessionUseCase(sessionRepository: SessionRepositoryImpl(userDefaults: UserDefaults.standard))))
+        RegisterViewController()
     }
 
